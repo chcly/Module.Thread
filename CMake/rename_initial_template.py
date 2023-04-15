@@ -37,7 +37,7 @@ def genTemplates():
                 fp = open(full_path, "r")
                 buf = fp.read()
                 fp.close()
-                buf = buf.replace("Template", templatename)
+                buf = buf.replace("Tbb", templatename)
                 fp = open(full_path, "w")
                 fp.write(buf)
                 fp.close()

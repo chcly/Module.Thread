@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(Tbb)
+project(Thread)
 
 # Use C++-17 by default.
 enable_language(CXX)
@@ -11,13 +11,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CMake - Contains project local modules.
 #
 # CMake/Modules - Contains project independent modules.
-#   GitUpdate.cmake invokes python ${Tbb_SOURCE_DIR}/gitupdate.py
+#   GitUpdate.cmake invokes python ${Thread_SOURCE_DIR}/gitupdate.py
 #   to pull all submodules and update to head.
 #   If this fails, it will attempt to invoke git directly to pull 
 #   submodules. 
 list(APPEND CMAKE_MODULE_PATH 
-  ${Tbb_SOURCE_DIR}/CMake 
-  ${Tbb_SOURCE_DIR}/CMake/Modules
+  ${Thread_SOURCE_DIR}/CMake 
+  ${Thread_SOURCE_DIR}/CMake/Modules
 )
 include(Configure)
 if (NOT Configure_SUCCEEDED)
@@ -26,25 +26,25 @@ endif()
 
 
 
-if (Tbb_ExternalTarget)
-    set(TargetFolders ${Tbb_TargetFolders})
-    set(TargetName    ${Tbb_TargetName})
-    set(TargetGroup   ${Tbb_TargetGroup})
+if (Thread_ExternalTarget)
+    set(TargetFolders ${Thread_TargetFolders})
+    set(TargetName    ${Thread_TargetName})
+    set(TargetGroup   ${Thread_TargetGroup})
 else()
     add_subdirectory(CMake)
 
     set(TargetFolders TRUE)
-    set(TargetName Tbb)
+    set(TargetName Thread)
     set(TargetGroup )
 
-    set(Tbb_INCLUDE  ${Tbb_SOURCE_DIR})
-    set(Tbb_LIBRARY  ${TargetName})
+    set(Thread_INCLUDE  ${Thread_SOURCE_DIR})
+    set(Thread_LIBRARY  ${TargetName})
 endif()
 
 add_subdirectory(Source)
 
-if (Tbb_BUILD_TEST)
-    if (NOT Tbb_ExternalTarget)
+if (Thread_BUILD_TEST)
+    if (NOT Thread_ExternalTarget)
         add_gtest_source(Extern/ThirdParty)
     endif()
 

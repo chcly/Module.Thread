@@ -26,22 +26,22 @@ endif()
 include(StaticRuntime)
 include(GTestUtils)
 include(ExternalTarget)
+include(findTBB)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(Tbb_BUILD_TEST          "Build the unit test program." ON)
-option(Tbb_AUTO_RUN_TEST       "Automatically run the test program." ON)
-option(Tbb_USE_STATIC_RUNTIME  "Build with the MultiThreaded(Debug) runtime library." ON)
+option(Thread_BUILD_TEST          "Build the unit test program." ON)
+option(Thread_AUTO_RUN_TEST       "Automatically run the test program." ON)
+option(Thread_USE_STATIC_RUNTIME  "Build with the MultiThreaded(Debug) runtime library." ON)
 
-if (Tbb_USE_STATIC_RUNTIME)
+if (Thread_USE_STATIC_RUNTIME)
     set_static_runtime()
 else()
     set_dynamic_runtime()
 endif()
 
-
-configure_gtest(${Tbb_SOURCE_DIR}/Test/googletest 
-                ${Tbb_SOURCE_DIR}/Test/googletest/googletest/include)
+configure_gtest(${Thread_SOURCE_DIR}/Test/googletest 
+                ${Thread_SOURCE_DIR}/Test/googletest/googletest/include)
 
 
 set(Configure_SUCCEEDED TRUE)

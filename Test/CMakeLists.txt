@@ -23,6 +23,6 @@ set_target_properties(
 )
 
 
-if (Tbb_AUTO_RUN_TEST)
+if (Thread_AUTO_RUN_TEST)
     run_test(${TestTargetName})
 endif()

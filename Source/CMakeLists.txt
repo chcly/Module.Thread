@@ -20,11 +20,18 @@
 set(TargetName_SOURCE 
     Main.cpp)
 
+include_directories(${TBB_SDK_INCLUDE})
+
 add_executable(
     ${TargetName} 
     ${TargetName_SOURCE}
 )
 
-if (TargetFolders)
-    set_target_properties(${TargetName} PROPERTIES FOLDER "${TargetGroup}")
-endif()
+target_link_libraries(
+    ${TargetName}  
+    TBB TBB12)
+
+set_target_properties(
+    ${TargetName} 
+    PROPERTIES FOLDER "${TargetGroup}"
+)

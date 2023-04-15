@@ -1,4 +1,4 @@
-# Tbb
+# Thread
 
 This template defines the CMake layout for a stand-alone / embedded project. The primary purpose for this structure is to have sub-modules that stand on their own, or included into larger projects as a component piece. If the module itself requires extra dependencies then they should be included into the module as sub-modules. 
 
@@ -93,6 +93,6 @@ Optional defines.
 
 | Option                      | Description                                          | Default |
 |:----------------------------|:-----------------------------------------------------|:-------:|
-| Tbb_BUILD_TEST         | Build the unit test program.                         |   ON    |
-| Tbb_AUTO_RUN_TEST      | Automatically run the test program.                  |   OFF   |
-| Tbb_USE_STATIC_RUNTIME | Build with the MultiThreaded(Debug) runtime library. |   ON    |
+| Thread_BUILD_TEST         | Build the unit test program.                         |   ON    |
+| Thread_AUTO_RUN_TEST      | Automatically run the test program.                  |   OFF   |
+| Thread_USE_STATIC_RUNTIME | Build with the MultiThreaded(Debug) runtime library. |   ON    |
