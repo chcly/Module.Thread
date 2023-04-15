@@ -44,4 +44,13 @@ configure_gtest(${Thread_SOURCE_DIR}/Test/googletest
                 ${Thread_SOURCE_DIR}/Test/googletest/googletest/include)
 
 
+DefineExternalTargetEx(
+    Utils Extern
+    ${Thread_SOURCE_DIR}/Internal/Utils 
+    ${Thread_SOURCE_DIR}/Internal/Utils
+    ${Thread_BUILD_TEST}
+    ${Thread_AUTO_RUN_TEST}
+)
+
+
 set(Configure_SUCCEEDED TRUE)

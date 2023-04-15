@@ -3,7 +3,7 @@ project(Thread)
 
 # Use C++-17 by default.
 enable_language(CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
@@ -32,6 +32,8 @@ if (Thread_ExternalTarget)
     set(TargetGroup   ${Thread_TargetGroup})
 else()
     add_subdirectory(CMake)
+    add_subdirectory(Internal/Utils)
+    include(${Utils_SOURCE_DIR}/CMake/Locals.cmake)
 
     set(TargetFolders TRUE)
     set(TargetName Thread)
