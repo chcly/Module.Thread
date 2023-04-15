@@ -13,6 +13,7 @@ namespace Rt2::Thread
 
     public:
         Runner();
+
         virtual ~Runner();
 
         void start();
