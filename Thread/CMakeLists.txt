@@ -10,7 +10,7 @@ set_group(
 
 include_directories(
     ${TBB_SDK_INCLUDE}
-    ${THREAD_INCLUDE}
+    ${Thread_INCLUDE}
     ${Utils_INCLUDE}
 )
 
@@ -23,10 +23,16 @@ add_library(
 
 target_link_libraries(
     ${TargetName}  
-    TBB 
-    TBB12
     ${Utils_LIBRARY}
 )
+
+if (Thread_USE_TBB)
+    target_link_libraries(
+        ${TargetName}  
+        TBB 
+        TBB12
+    )
+endif()
 
 set_target_properties(
     ${TargetName} 

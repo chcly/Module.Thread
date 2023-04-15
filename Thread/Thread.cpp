@@ -1,11 +1,10 @@
-#include "Thread.h"
+#include "Thread/Thread.h"
 #include "Utils/Console.h"
 
 namespace Rt2::Thread
 {
 
-    Thread::Thread() :
-        _thread(nullptr)
+    Thread::Thread()
     {
     }
 

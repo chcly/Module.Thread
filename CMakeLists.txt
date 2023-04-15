@@ -43,7 +43,7 @@ else()
     set(Thread_LIBRARY  ${TargetName} TBB)
 endif()
 
-add_subdirectory(Source)
+add_subdirectory(Thread)
 
 if (Thread_BUILD_TEST)
     if (NOT Thread_ExternalTarget)

@@ -1,6 +1,6 @@
 #pragma once
-#include "SharedValue.h"
-#include "Thread.h"
+#include "Thread/SharedValue.h"
+#include "Thread/Thread.h"
 
 namespace Rt2::Thread
 {

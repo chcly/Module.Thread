@@ -1,9 +1,8 @@
 #pragma once
-#include "Mutex.h"
+#include "Thread/Mutex.h"
 
 namespace Rt2::Thread
 {
-
     template <typename T>
     class SharedValue
     {
@@ -11,10 +10,10 @@ namespace Rt2::Thread
         using ValueType = T;
 
     protected:
-        ValueType      _value{};
+        ValueType _value{};
 
     public:
-        SharedValue() = default;
+        SharedValue()                                 = default;
         SharedValue(const SharedValue& val)           = delete;
         SharedValue operator=(const SharedValue& val) = delete;
 
@@ -23,15 +22,15 @@ namespace Rt2::Thread
         {
         }
 
-        ValueType get(Mutex &owner)
+        ValueType get(Mutex& owner)
         {
             ScopeLock lock(&owner);
             return _value;
         }
 
-        void set(const ValueType& rhs, Mutex &owner)
+        void set(const ValueType& rhs, Mutex& owner)
         {
-            if (const ScopeLock lock(&owner); 
+            if (const ScopeLock lock(&owner);
                 lock.isLocked())
                 _value = rhs;
         }
@@ -45,11 +44,11 @@ namespace Rt2::Thread
 
     public:
         template <typename... Args>
-        void invoke(Mutex &owner, Args&&... args)
+        void invoke(Mutex& owner, Args&&... args)
         {
-            if (const ScopeLock lock(&owner); 
+            if (const ScopeLock lock(&owner);
                 lock.isLocked())
                 this->_value((std::forward<Args>(args), ...));
         }
     };
-}  // namespace Rt2
+}  // namespace Rt2::Thread

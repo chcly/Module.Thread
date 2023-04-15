@@ -1,12 +1,10 @@
 #include <cstdio>
-#include "Source/ParallelFor.h"
-#include "Source/Runner.h"
-#include "Source/Thread.h"
+#include "Thread/ParallelFor.h"
+#include "Thread/Runner.h"
+#include "Thread/Thread.h"
 #include "Utils/Array.h"
-#include "Utils/Console.h"
 #include "Utils/Time.h"
 #include "gtest/gtest.h"
-#include "oneapi/tbb.h"
 
 using namespace Rt2::Thread;
 
@@ -106,6 +104,7 @@ GTEST_TEST(Thread, Thread_002)
     EXPECT_EQ(main.iteration(), inside);
 }
 
+#ifdef USE_ONEAPI
 GTEST_TEST(OneAPI, Test_001)
 {
     Rt2::SimpleArray<int> foo;
@@ -114,8 +113,8 @@ GTEST_TEST(OneAPI, Test_001)
     foo.resize(1'000'000, 0);
     Rt2::Console::println("run");
     For<int>::invoke(foo.data(), foo.size(), [](int& v)
-    {
+                     {
         v += 1;
-        v %= 3;
-    });
+        v %= 3; });
 }
+#endif

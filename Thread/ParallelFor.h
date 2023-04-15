@@ -1,6 +1,8 @@
 #pragma once
-#include <functional>
-#include "oneapi/tbb/parallel_for.h"
+#ifdef USE_ONEAPI
+
+    #include <functional>
+    #include "oneapi/tbb/parallel_for.h"
 
 namespace Rt2::Thread
 {
@@ -40,3 +42,4 @@ namespace Rt2::Thread
     };
 
 }  // namespace Rt2::Thread
+#endif
