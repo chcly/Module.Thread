@@ -39,8 +39,8 @@ else()
     set(TargetName Thread)
     set(TargetGroup )
 
-    set(Thread_INCLUDE  ${Thread_SOURCE_DIR})
-    set(Thread_LIBRARY  ${TargetName})
+    set(Thread_INCLUDE  ${Thread_SOURCE_DIR} ${TBB_SDK_INCLUDE})
+    set(Thread_LIBRARY  ${TargetName} TBB)
 endif()
 
 add_subdirectory(Source)

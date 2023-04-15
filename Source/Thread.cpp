@@ -28,7 +28,7 @@ namespace Rt2::Thread
     void Thread::invoke(const Update& update)
     {
         if (!_thread)
-            _thread = new PlatformThread(update);
+            _thread = new StandardThread(update);
     }
 
     void Thread::join()

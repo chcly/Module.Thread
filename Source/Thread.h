@@ -4,15 +4,15 @@
 
 namespace Rt2::Thread
 {
+    using StandardThread = std::thread;
+
     class Thread
     {
     public:
         using Update = std::function<void()>;
 
     private:
-        using PlatformThread = std::thread;
-
-        PlatformThread* _thread;
+        StandardThread* _thread{nullptr};
 
     public:
         Thread();
@@ -21,18 +21,15 @@ namespace Rt2::Thread
         void invoke(const Update& update);
 
         template <typename Callable, typename... Args>
-
-        void invoke(const Callable& call, Args&& ... args)
+        void invoke(const Callable &call, Args&&... args)
         {
             if (!_thread)
-                _thread = new PlatformThread(call, std::forward<Args>(args)...);
+                _thread = new StandardThread(call, std::forward<Args>(args)...);
         }
 
         void join();
 
         static void yield();
-
         static void sleep(uint32_t ms);
     };
-
 }  // namespace Rt2::Thread

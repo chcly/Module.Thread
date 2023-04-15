@@ -1,6 +1,5 @@
 set(TestTargetName ${TargetName}Test)
-include(TestDirectory)
-gen_path_to_here()
+include(TargetDebugOptions)
 
 set(TestTarget_SRC
     Test1.cpp
@@ -28,6 +27,7 @@ set_target_properties(
     PROPERTIES FOLDER "${TargetGroup}"
 )
 
+TARGET_DEBUG(${TestTargetName} ${CMAKE_BINARY_DIR} )
 
 if (Thread_AUTO_RUN_TEST)
     run_test_indir(${TestTargetName} ${CMAKE_BINARY_DIR})
