@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(Template)
+project(Tbb)
 
 # Use C++-17 by default.
 enable_language(CXX)
@@ -11,13 +11,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CMake - Contains project local modules.
 #
 # CMake/Modules - Contains project independent modules.
-#   GitUpdate.cmake invokes python ${Template_SOURCE_DIR}/gitupdate.py
+#   GitUpdate.cmake invokes python ${Tbb_SOURCE_DIR}/gitupdate.py
 #   to pull all submodules and update to head.
 #   If this fails, it will attempt to invoke git directly to pull 
 #   submodules. 
 list(APPEND CMAKE_MODULE_PATH 
-  ${Template_SOURCE_DIR}/CMake 
-  ${Template_SOURCE_DIR}/CMake/Modules
+  ${Tbb_SOURCE_DIR}/CMake 
+  ${Tbb_SOURCE_DIR}/CMake/Modules
 )
 include(Configure)
 if (NOT Configure_SUCCEEDED)
@@ -26,25 +26,25 @@ endif()
 
 
 
-if (Template_ExternalTarget)
-    set(TargetFolders ${Template_TargetFolders})
-    set(TargetName    ${Template_TargetName})
-    set(TargetGroup   ${Template_TargetGroup})
+if (Tbb_ExternalTarget)
+    set(TargetFolders ${Tbb_TargetFolders})
+    set(TargetName    ${Tbb_TargetName})
+    set(TargetGroup   ${Tbb_TargetGroup})
 else()
     add_subdirectory(CMake)
 
     set(TargetFolders TRUE)
-    set(TargetName Template)
+    set(TargetName Tbb)
     set(TargetGroup )
 
-    set(Template_INCLUDE  ${Template_SOURCE_DIR})
-    set(Template_LIBRARY  ${TargetName})
+    set(Tbb_INCLUDE  ${Tbb_SOURCE_DIR})
+    set(Tbb_LIBRARY  ${TargetName})
 endif()
 
 add_subdirectory(Source)
 
-if (Template_BUILD_TEST)
-    if (NOT Template_ExternalTarget)
+if (Tbb_BUILD_TEST)
+    if (NOT Tbb_ExternalTarget)
         add_gtest_source(Extern/ThirdParty)
     endif()
 
