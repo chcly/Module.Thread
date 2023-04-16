@@ -51,7 +51,6 @@ GTEST_TEST(Thread, Thread_002)
     class Primary
     {
     private:
-        Mutex                 mutex;
         SharedValue<uint32_t> current{0};
 
     public:
@@ -65,7 +64,7 @@ GTEST_TEST(Thread, Thread_002)
                 if (runner.isRunning())
                     runner.stop();
                 runner.start();
-                current.set(i, mutex);
+                current.set(i);
             }
             if (runner.isRunning())
                 runner.stop();
@@ -73,7 +72,7 @@ GTEST_TEST(Thread, Thread_002)
 
         uint32_t iteration()
         {
-            return current.get(mutex);
+            return current.get();
         }
     };
 

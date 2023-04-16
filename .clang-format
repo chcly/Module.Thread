@@ -19,7 +19,7 @@ AlignArrayOfStructures:              Right
 MaxEmptyLinesToKeep:                1
 KeepEmptyLinesAtTheStartOfBlocks:   false
 
-IndentPPDirectives:     BeforeHash
+IndentPPDirectives:     None
 IncludeBlocks:          Merge
 AccessModifierOffset:   -4
 NamespaceIndentation:   All

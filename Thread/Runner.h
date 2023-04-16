@@ -9,8 +9,6 @@ namespace Rt2::Thread
     private:
         Thread            _thread{};
         SharedValue<bool> _status{false};
-        Mutex             _mutex{};
-
     public:
         Runner();
 

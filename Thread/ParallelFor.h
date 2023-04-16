@@ -1,8 +1,8 @@
 #pragma once
 #ifdef USE_ONEAPI
 
-    #include <functional>
-    #include "oneapi/tbb/parallel_for.h"
+#include <functional>
+#include "oneapi/tbb/parallel_for.h"
 
 namespace Rt2::Thread
 {

@@ -11,9 +11,9 @@ namespace Rt2::Thread
 
     void Runner::start()
     {
-        if (!_status.get(_mutex))
+        if (!_status.get())
         {
-            _status.set(true, _mutex);
+            _status.set(true);
             _thread.invoke(
                 [this]
                 { update(); });
@@ -22,16 +22,16 @@ namespace Rt2::Thread
 
     void Runner::stop()
     {
-        if (_status.get(_mutex))
+        if (_status.get())
         {
-            _status.set(false, _mutex);
+            _status.set(false);
             _thread.join();
         }
     }
 
     bool Runner::isRunning()
     {
-        return _status.get(_mutex);
+        return _status.get();
     }
 
     void Runner::update()
