@@ -5,6 +5,7 @@
 #include "Utils/Array.h"
 #include "Utils/Time.h"
 #include "gtest/gtest.h"
+#include "Thread/ParallelArray.h"
 
 using namespace Rt2::Thread;
 
@@ -104,6 +105,7 @@ GTEST_TEST(Thread, Thread_002)
 }
 
 #ifdef USE_ONEAPI
+
 GTEST_TEST(OneAPI, Test_001)
 {
     Rt2::SimpleArray<int> foo;
@@ -111,9 +113,24 @@ GTEST_TEST(OneAPI, Test_001)
     Rt2::Console::println("alloc");
     foo.resize(1'000'000, 0);
     Rt2::Console::println("run");
-    For<int>::invoke(foo.data(), foo.size(), [](int& v)
-                     {
-        v += 1;
-        v %= 3; });
+    For<int>::invoke(
+        foo.data(),
+        foo.size(),
+        [](int& v)
+        {
+            v += 1;
+            v %= 3;
+        });
+}
+
+
+
+GTEST_TEST(OneApi, Test_002)
+{
+    ParallelArray<int> pi;
+
+    for (int i=0; i<10000; ++i)
+        pi.push_back(i);
+
 }
 #endif
