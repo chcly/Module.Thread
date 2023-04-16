@@ -39,9 +39,14 @@ else()
     set(TargetName Thread)
     set(TargetGroup )
 
-    set(Thread_INCLUDE  ${Thread_SOURCE_DIR} ${TBB_SDK_INCLUDE})
-    set(Thread_LIBRARY  ${TargetName} TBB)
+    set(Thread_INCLUDE  ${Thread_SOURCE_DIR})
+    set(Thread_LIBRARY  ${TargetName})
+
+    if (Thread_USE_ONEAPI)
+        include(${Thread_SOURCE_DIR}/CMake/Globals.cmake)
+    endif()
 endif()
+
 
 add_subdirectory(Thread)
 

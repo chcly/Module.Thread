@@ -32,7 +32,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 option(Thread_BUILD_TEST          "Build the unit test program." ON)
 option(Thread_AUTO_RUN_TEST       "Automatically run the test program." ON)
 option(Thread_USE_STATIC_RUNTIME  "Build with the MultiThreaded(Debug) runtime library." ON)
-option(Thread_USE_TBB             "Build with Intell Thread Building Blocks." OFF)
+include (${Thread_SOURCE_DIR}/CMake/Globals.cmake)
 
 if (Thread_USE_STATIC_RUNTIME)
     set_static_runtime()
@@ -40,10 +40,6 @@ else()
     set_dynamic_runtime()
 endif()
 
-if (Thread_USE_TBB)
-    include(findTBB)
-    include (${Thread_SOURCE_DIR}/CMake/Globals.cmake)
-endif()
 
 
 configure_gtest(${Thread_SOURCE_DIR}/Test/googletest 
