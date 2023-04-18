@@ -20,6 +20,8 @@ namespace Rt2::Thread
 
         bool isRunning();
 
+        bool isRunningUnlocked();
+
         virtual void update();
     };
 }  // namespace Rt2::Thread

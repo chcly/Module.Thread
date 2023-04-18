@@ -34,6 +34,11 @@ namespace Rt2::Thread
         return _status.get();
     }
 
+    bool Runner::isRunningUnlocked()
+    {
+        return _status.value();
+    }
+
     void Runner::update()
     {
     }

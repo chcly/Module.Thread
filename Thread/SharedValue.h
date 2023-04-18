@@ -37,6 +37,11 @@ namespace Rt2::Thread
             return error;
         }
 
+        ValueType value()
+        {
+            return _value;
+        }
+
         void set(const ValueType& rhs)
         {
             if (const ScopeLock lock(&_mutex);

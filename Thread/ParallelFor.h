@@ -1,8 +1,8 @@
 #pragma once
 #ifdef USE_ONEAPI
 
+#include <oneapi/tbb.h>
 #include <functional>
-#include "oneapi/tbb/parallel_for.h"
 
 namespace Rt2::Thread
 {
@@ -38,6 +38,43 @@ namespace Rt2::Thread
             oneapi::tbb::parallel_for(
                 oneapi::tbb::blocked_range<SizeType>(0, size),
                 For(ptr, invoke));
+        }
+    };
+
+    template <typename T, typename SizeType = uint32_t>
+    class Copy
+    {
+    public:
+        using PointerType      = T*;
+        using ConstPointerType = const T*;
+
+    private:
+        ConstPointerType _src{nullptr};
+        PointerType      _dest{nullptr};
+
+        Copy(PointerType dest, ConstPointerType src) :
+            _src(src),
+            _dest(dest)
+        {
+        }
+
+    public:
+        void operator()(const oneapi::tbb::blocked_range<SizeType>& r) const
+        {
+            ConstPointerType s = _src;
+            PointerType      d = _dest;
+
+            for (SizeType i = r.begin(); i != r.end(); ++i)
+                d[i] = s[i];
+        }
+
+        static void invoke(PointerType      dest,
+                           ConstPointerType src,
+                           SizeType         size)
+        {
+            oneapi::tbb::parallel_for(
+                oneapi::tbb::blocked_range<SizeType>(0, size),
+                Copy(dest, src));
         }
     };
 
