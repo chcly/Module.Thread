@@ -1,7 +1,9 @@
 #pragma once
-#ifdef USE_ONEAPI
 
+#ifdef USE_ONEAPI
 #include <oneapi/tbb.h>
+#endif
+
 #include <functional>
 
 namespace Rt2::Thread
@@ -24,6 +26,7 @@ namespace Rt2::Thread
         }
 
     public:
+#ifdef USE_ONEAPI
         void operator()(const oneapi::tbb::blocked_range<SizeType>& r) const
         {
             PointerType ptr = _data;
@@ -39,6 +42,23 @@ namespace Rt2::Thread
                 oneapi::tbb::blocked_range<SizeType>(0, size),
                 For(ptr, invoke));
         }
+#else
+        void operator()(const SizeType& r) const
+        {
+            PointerType ptr = _data;
+            PointerType end = _data + r;
+
+            while (ptr != end)
+                _invoke(*ptr++);
+        }
+
+        static void invoke(PointerType     ptr,
+                           SizeType        size,
+                           const Function& invoke)
+        {
+            For(ptr, invoke)(size);
+        }
+#endif
     };
 
     template <typename T, typename SizeType = uint32_t>
@@ -59,6 +79,7 @@ namespace Rt2::Thread
         }
 
     public:
+#ifdef USE_ONEAPI
         void operator()(const oneapi::tbb::blocked_range<SizeType>& r) const
         {
             ConstPointerType s = _src;
@@ -76,7 +97,22 @@ namespace Rt2::Thread
                 oneapi::tbb::blocked_range<SizeType>(0, size),
                 Copy(dest, src));
         }
-    };
+#else
+        void operator()(const SizeType& r) const
+        {
+            ConstPointerType s = _src;
+            PointerType      d = _dest;
 
-}  // namespace Rt2::Thread
+            for (SizeType i = 0; i<r; ++i)
+                d[i] = s[i];
+        }
+
+        static void invoke(PointerType      dest,
+                           ConstPointerType src,
+                           SizeType         size)
+        {
+            Copy(dest, src)(size);
+        }
 #endif
+    };
+}  // namespace Rt2::Thread

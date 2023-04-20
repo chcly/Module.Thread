@@ -104,7 +104,6 @@ GTEST_TEST(Thread, Thread_002)
     EXPECT_EQ(main.iteration(), inside);
 }
 
-#ifdef USE_ONEAPI
 
 GTEST_TEST(OneAPI, Test_001)
 {
@@ -123,6 +122,7 @@ GTEST_TEST(OneAPI, Test_001)
         });
 }
 
+#ifdef USE_ONEAPI
 
 
 GTEST_TEST(OneApi, Test_002)
