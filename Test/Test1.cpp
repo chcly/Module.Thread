@@ -5,7 +5,6 @@
 #include "Utils/Array.h"
 #include "Utils/Time.h"
 #include "gtest/gtest.h"
-#include "Thread/ParallelArray.h"
 
 using namespace Rt2::Thread;
 
@@ -121,16 +120,3 @@ GTEST_TEST(OneAPI, Test_001)
             v %= 3;
         });
 }
-
-#ifdef USE_ONEAPI
-
-
-GTEST_TEST(OneApi, Test_002)
-{
-    ParallelArray<int> pi;
-
-    for (int i=0; i<10000; ++i)
-        pi.push_back(i);
-
-}
-#endif

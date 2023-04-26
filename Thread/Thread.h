@@ -30,7 +30,7 @@ namespace Rt2::Thread
         void join();
 
         static void yield();
+
         static void sleep(uint32_t ms);
-        static void nanoSleep(uint32_t ms);
     };
 }  // namespace Rt2::Thread

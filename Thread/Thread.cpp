@@ -23,12 +23,7 @@ namespace Rt2::Thread
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
     }
-
-    void Thread::nanoSleep(const uint32_t ms)
-    {
-        std::this_thread::sleep_for(std::chrono::nanoseconds(ms));
-    }
-
+    
     void Thread::invoke(const Update& update)
     {
         if (!_thread)
