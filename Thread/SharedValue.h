@@ -18,6 +18,11 @@ namespace Rt2::Thread
         SharedValue(const SharedValue& val)            = default;
         SharedValue& operator=(const SharedValue& val) = default;
 
+        ScopeLock scopeLock()
+        {
+            return ScopeLock(&_mutex);
+        }
+
         explicit SharedValue(const ValueType& val) :
             _value(val)
         {
@@ -29,10 +34,20 @@ namespace Rt2::Thread
             return _value;
         }
 
+        void lock()
+        {
+            _mutex.lock();
+        }
+
+        void unlock()
+        {
+            _mutex.unlock();
+        }
+
         ValueType tryGet(ValueType error)
         {
             if (const ScopeLock lock(&_mutex);
-                !lock.isLocked())
+                lock.isLocked())
                 return _value;
             return error;
         }
@@ -46,7 +61,7 @@ namespace Rt2::Thread
         {
             if (const ScopeLock lock(&_mutex);
                 lock.isLocked())
-                _value = rhs;
+                _value = std::move(rhs);
         }
     };
 

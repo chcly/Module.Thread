@@ -1,9 +1,11 @@
 #pragma once
 #include <shared_mutex>
+#include  <mutex>
+
 
 namespace Rt2::Thread
 {
-    using Mutex = std::shared_mutex;
+    using Mutex = std::mutex;
 
     class ScopeLock
     {
