@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 
 #ifdef USE_ONEAPI
 #include <oneapi/tbb.h>
