@@ -42,7 +42,7 @@ else()
     set(Thread_INCLUDE  ${Thread_SOURCE_DIR})
     set(Thread_LIBRARY  ${TargetName})
 
-    if (Thread_USE_ONEAPI)
+    if (Thread_USE_TBB)
         include(${Thread_SOURCE_DIR}/CMake/Globals.cmake)
     endif()
 endif()
