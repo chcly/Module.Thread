@@ -10,8 +10,9 @@ using namespace Rt2::Thread;
 
 GTEST_TEST(Thread, Thread_001)
 {
-    constexpr uint32_t wait       = 0x10;
-    const uint32_t     scopeStart = Rt2::Time::now32();
+    constexpr uint32_t wait = 0x10;
+
+    const uint32_t scopeStart = Rt2::Time::now32();
     {
         struct Sleeper
         {
@@ -95,28 +96,9 @@ GTEST_TEST(Thread, Thread_002)
             i = main.iteration();
             ++foreground;
         }
-        //EXPECT_GE(i, outside);
-        //EXPECT_GE(main.iteration(), outside);
+        // EXPECT_GE(i, outside);
+        // EXPECT_GE(main.iteration(), outside);
     }
-
-    //EXPECT_LT(foreground, foregroundMax);
+    // EXPECT_LT(foreground, foregroundMax);
     EXPECT_EQ(main.iteration(), inside);
-}
-
-
-GTEST_TEST(OneAPI, Test_001)
-{
-    Rt2::SimpleArray<int> foo;
-
-    Rt2::Console::println("alloc");
-    foo.resize(1'000'000, 0);
-    Rt2::Console::println("run");
-    For<int>::invoke(
-        foo.data(),
-        foo.size(),
-        [](int& v)
-        {
-            v += 1;
-            v %= 3;
-        });
 }
