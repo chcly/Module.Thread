@@ -20,9 +20,8 @@
 -------------------------------------------------------------------------------
 */
 #pragma once
-#include <shared_mutex>
-#include  <mutex>
-
+#include <mutex>
+#include "Utils/Definitions.h"
 
 namespace Rt2::Thread
 {
@@ -31,11 +30,12 @@ namespace Rt2::Thread
     class ScopeLock
     {
     private:
-        Mutex *_mutex{nullptr};
+        Mutex* _mutex{nullptr};
 
     public:
-        explicit ScopeLock(Mutex * mutex)
+        explicit ScopeLock(Mutex* mutex)
         {
+            RT_GUARD_CHECK_VOID(mutex)
             if (mutex->try_lock())
                 _mutex = mutex;
         }
@@ -46,11 +46,11 @@ namespace Rt2::Thread
                 _mutex->unlock();
         }
 
-        bool isLocked() const
-        {
-            return _mutex != nullptr;
-        }
+        bool isLocked() const;
     };
 
-
+    inline bool ScopeLock::isLocked() const
+    {
+        return _mutex != nullptr;
+    }
 }  // namespace Rt2::Thread

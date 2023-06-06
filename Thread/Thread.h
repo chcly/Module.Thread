@@ -35,6 +35,8 @@ namespace Rt2::Thread
     private:
         StandardThread* _thread{nullptr};
 
+        void destroy();
+
     public:
         Thread();
         ~Thread();

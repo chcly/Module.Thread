@@ -30,9 +30,9 @@ namespace Rt2::Thread
     private:
         Thread            _thread{};
         SharedValue<bool> _status{false};
+
     public:
         Runner();
-
         virtual ~Runner();
 
         void start();

@@ -94,7 +94,7 @@ namespace Rt2::Thread
         ConstPointerType _src{nullptr};
         PointerType      _dest{nullptr};
 
-        Copy(PointerType dest, ConstPointerType src) :
+        Copy(const PointerType dest, const ConstPointerType src) :
             _src(src),
             _dest(dest)
         {

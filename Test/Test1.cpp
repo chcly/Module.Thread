@@ -2,7 +2,6 @@
 #include "Thread/ParallelFor.h"
 #include "Thread/Runner.h"
 #include "Thread/Thread.h"
-#include "Utils/Array.h"
 #include "Utils/Time.h"
 #include "gtest/gtest.h"
 
@@ -102,3 +101,4 @@ GTEST_TEST(Thread, Thread_002)
     // EXPECT_LT(foreground, foregroundMax);
     EXPECT_EQ(main.iteration(), inside);
 }
+
