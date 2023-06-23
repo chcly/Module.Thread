@@ -23,6 +23,14 @@
 #include <cstdint>
 
 #ifdef USE_ONEAPI
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
+#include <utility>
+//
 #include <oneapi/tbb.h>
 #endif
 
@@ -125,7 +133,7 @@ namespace Rt2::Thread
             ConstPointerType s = _src;
             PointerType      d = _dest;
 
-            for (SizeType i = 0; i<r; ++i)
+            for (SizeType i = 0; i < r; ++i)
                 d[i] = s[i];
         }
 
