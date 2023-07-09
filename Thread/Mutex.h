@@ -21,11 +21,14 @@
 */
 #pragma once
 #include <mutex>
+#include <shared_mutex>
 #include "Utils/Definitions.h"
 
 namespace Rt2::Thread
 {
-    using Mutex = std::mutex;
+    using Mutex       = std::mutex;
+    using SharedMutex = std::shared_mutex;
+    using ScopeMutex = std::scoped_lock<std::mutex>;
 
     class ScopeLock
     {
